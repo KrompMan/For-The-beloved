@@ -1,9 +1,11 @@
+// script.js
+
+// ───────────── Typing Quotes ─────────────
 const messages = [
-  "I like you more than all the stars in the sky ✨",
+  "I made this site just to tell you you're amazing 🌹",
   "You make my world brighter 💡",
   "Your smile is my favorite thing 😊",
   "Every moment with you feels special 💖",
-  "I made this site just to tell you you're amazing 🌹",
   "I think you already know you’ve got me wrapped around your finger 🧷",
   "I feel honored just being in your presence ❤️❤️❤️",
   "My heart is a captive of yours, and I couldn't be happier! 💘",
@@ -11,14 +13,26 @@ const messages = [
   "I feel so helpless and vulnerable around you 🤍",
   "You don’t need to ask twice — I’m already yours. 🥀",
   "You're my favorite kind of authority. 💼❤️",
-  "Being yours feels like the most natural thing. 🌸"
+  "Being yours feels like the most natural thing. 🌸",
+  "I’m yours completely, whenever you wish 🤍",
+  "At your command, I’m ready to please you 🥀",
+  "Your word is my guide and my desire 🌹",
+  "I find peace in following your lead 🌙",
+  "Every moment under your gaze feels right ✨",
+  "Being your devoted one is my greatest joy ❤️",
+  "I surrender willingly to your gentle power 🕊️",
+  "Your happiness is my highest reward 💖",
+  "To serve you is where I find my strength 💪🌸",
+  "I'm grateful to be your loyal companion 🤗"
 ];
+
+
 
 let currentIndex = 0;
 
 function showMessage() {
-  const message = messages[currentIndex];
-  typeMessage(message);
+  const text = messages[currentIndex];
+  typeMessage(text);
   currentIndex = (currentIndex + 1) % messages.length;
 }
 
@@ -26,46 +40,93 @@ function typeMessage(text) {
   const el = document.getElementById("secretMessage");
   el.textContent = "";
   let i = 0;
-
-  const interval = setInterval(() => {
-    el.textContent += text[i];
-    i++;
-    if (i >= text.length) clearInterval(interval);
+  const iv = setInterval(() => {
+    el.textContent += text[i++];
+    if (i >= text.length) clearInterval(iv);
   }, 40);
 }
 
-function handleFeedback(feeling) {
-  const prompt = document.getElementById("feedbackPrompt");
-  const input = document.getElementById("feedbackInput");
-  const button = document.getElementById("submitFeedbackBtn");
-  const display = document.getElementById("feedbackDisplay");
+// Expose for inline onclick
+window.showMessage = showMessage;
 
-  display.innerText = "";
-  input.style.display = "block";
-  button.style.display = "inline-block";
+
+// ───────────── Feedback Section ─────────────
+function handleFeedback(feeling) {
+  const promptEl  = document.getElementById("feedbackPrompt");
+  const inputEl   = document.getElementById("feedbackInput");
+  const submitBtn = document.getElementById("submitFeedbackBtn");
+  const displayEl = document.getElementById("feedbackDisplay");
+
+  displayEl.textContent = "";
+  inputEl.style.display   = "block";
+  submitBtn.style.display = "inline-block";
 
   if (feeling === "bad") {
-    prompt.innerText = "OH I'M SO SORRY 😭 what did my dumbass do?";
+    promptEl.textContent = "OH I'M SO SORRY 😭 what did my dumbass do?";
   } else if (feeling === "sweet") {
-    prompt.innerText = "🥺 Y-you really think so? Tell me more...";
+    promptEl.textContent = "🥺 Y-you really think so? Tell me more...";
   } else if (feeling === "neutral") {
-    prompt.innerText = "I'm SO SORRY, What could I do better?";
+    promptEl.textContent = "I'm SO SORRY, What could I do better?";
   }
 }
 
 function submitFeedback() {
-  const feedback = document.getElementById("feedbackInput").value.trim();
-  const display = document.getElementById("feedbackDisplay");
+  const inputEl   = document.getElementById("feedbackInput");
+  const displayEl = document.getElementById("feedbackDisplay");
+  const promptEl  = document.getElementById("feedbackPrompt");
 
+  const feedback = inputEl.value.trim();
   if (feedback) {
-    display.innerText = `You said: "${feedback}" 🥺`;
-    document.getElementById("feedbackInput").value = "";
+    displayEl.textContent = `You said: "${feedback}" 🥺`;
+    inputEl.value = "";
   } else {
-    display.innerText = "You didn’t say anything... I guess silence is feedback too 😔";
+    displayEl.textContent = "You didn’t say anything... I guess silence is feedback too 😔";
   }
-
-  document.getElementById("feedbackInput").style.display = "none";
+  inputEl.style.display       = "none";
   document.getElementById("submitFeedbackBtn").style.display = "none";
-  document.getElementById("feedbackPrompt").innerText = "";
+  promptEl.textContent        = "";
 }
+
+// Expose for inline onclick
+window.handleFeedback  = handleFeedback;
+window.submitFeedback  = submitFeedback;
+
+
+// ───────────── Vertical Love Meter ─────────────
+document.addEventListener("DOMContentLoaded", () => {
+  const meter = document.getElementById("verticalLoveMeter");
+  const fill  = document.getElementById("verticalLoveMeterFill");
+  const msg   = document.getElementById("verticalConfessionMsg");
+
+  const confessions = [
+    "I love you because you're so kind 🥰",
+    "I love you because you are so pretty! 🌹",
+    "I love you because you're so confident! 💪",
+    "I love you because __________________", // edit me
+    "I love you because __________________"  // edit me
+  ];
+
+  let clicks = 0;
+  let idx    = 0;
+  const max  = confessions.length;
+
+  meter.addEventListener("click", () => {
+    // advance meter
+    clicks = (clicks + 1) % max;
+    const pct = ((clicks + 1) / max) * 100;
+    fill.style.height = pct + "%";
+
+    // show message
+    if (clicks === max - 1) {
+      msg.textContent = confessions[idx];
+      idx = (idx + 1) % max;
+    } else {
+      msg.textContent = `Love meter: ${Math.round(pct)}% 💕`;
+    }
+  });
+});
+document.getElementById("confessionBtn").addEventListener("click", () => {
+  // Trigger the love meter's click handler
+  document.getElementById("verticalLoveMeter").click();
+});
 
