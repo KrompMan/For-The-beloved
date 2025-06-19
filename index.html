@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For You ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Top Confession Button -->
+  <button id="confessionBtn" style="
+    position: fixed;
+    top: 55%;
+    right: 100px;
+    transform: translateY(-50%);
+    padding: 12px 20px;
+    background-color: #ff4081;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(255,64,129,0.6);
+    font-weight: bold;
+    user-select: none;
+    z-index: 1100;">
+    TOP 5 REASONS WHY I LOVE YOU 💌
+  </button>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h1>Hi Heeba,</h1>
+    <p>This is just something I made for you.</p>
+
+    <button onclick="showMessage()">Click me 💌</button>
+    <p id="secretMessage"></p>
+
+    <!-- Feedback Section -->
+    <div id="feedbackSection">
+      <h2>How did I do today? 🫣</h2>
+      <button onclick="handleFeedback('bad')">Bad 😓</button>
+      <button onclick="handleFeedback('sweet')">Sweet 🥰</button>
+      <button onclick="handleFeedback('neutral')">Neutral 😶</button>
+
+      <p id="feedbackPrompt"></p>
+      <textarea id="feedbackInput" rows="4" placeholder="Type here..."></textarea><br>
+      <button id="submitFeedbackBtn" onclick="submitFeedback()">Submit 💌</button>
+
+      <p id="feedbackDisplay"></p>
+    </div>
+  </div>
+
+  <!-- Vertical Love Meter -->
+  <div id="verticalLoveMeter" title="Click to fill my love meter">
+    <div id="verticalLoveMeterFill">
+      <svg viewBox="0 0 120 28" preserveAspectRatio="none">
+        <path fill="#ff69b4" fill-opacity="0.5" d="
+          M0 20
+          Q 10 15 20 20
+          T 40 20
+          T 60 20
+          T 80 20
+          T 100 20
+          T 120 20
+          V 28
+          H 0
+          Z">
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="translate"
+            from="0"
+            to="-40"
+            begin="0s"
+            dur="4s"
+            repeatCount="indefinite"/>
+        </path>
+      </svg>
+    </div>
+  </div>
+  <p id="verticalConfessionMsg"></p>
+
+  <!-- JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>
