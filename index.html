@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For You ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Hi Heeba,</h1>
+    <p>This is just something I made for you.</p>
+
+    <button onclick="showMessage()">Click me 💌</button>
+    <p id="secretMessage"></p>
+
+    <div id="feedbackSection">
+      <h2>How did I do today? 🫣</h2>
+      <button onclick="handleFeedback('bad')">Bad 😓</button>
+      <button onclick="handleFeedback('sweet')">Sweet 🥰</button>
+      <button onclick="handleFeedback('neutral')">Neutral 😶</button>
+
+      <p id="feedbackPrompt"></p>
+
+      <textarea id="feedbackInput" rows="4" placeholder="Type here..."></textarea><br>
+      <button id="submitFeedbackBtn" onclick="submitFeedback()">Submit 💌</button>
+
+      <p id="feedbackDisplay"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
